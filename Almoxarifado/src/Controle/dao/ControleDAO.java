@@ -5,14 +5,14 @@
  */
 package Controle.dao;
 
-import Controle.Emprestimo;
+
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.bean.Controle;
-import Controle.ProdutosDoEstado;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,7 +43,7 @@ public class ControleDAO implements OverDAO<Controle> {
 
         try {
             Funcionario f = new Funcionario();
-            Emprestimo e = new Emprestimo();
+      
             Cliente cli = new Cliente();
             Controle c = new Controle();
            /* int fk; String fks;
