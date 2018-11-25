@@ -3,18 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/Consulta.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/ProdutosDoEstado.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/model/bean/Cliente.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/Sobre.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/TelaPrincipal.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/ProdutosDaCooperativa.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/Cadastro.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/Emprestimo.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/Login.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/dao/ControleDAO.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/dao/ProdDAO.java</file>
-            <file>file:/C:/TCC-master/Almoxarifado/src/Controle/dao/ClienteDAO.java</file>
+            <file>file:/C:/Controle-de-Almoxarifado/Almoxarifado/src/Controle/TelaPrincipal.java</file>
+            <file>file:/C:/Controle-de-Almoxarifado/Almoxarifado/src/Controle/dao/ProdDAO.java</file>
+            <file>file:/C:/Controle-de-Almoxarifado/Almoxarifado/src/Controle/dao/ControleDAO.java</file>
+            <file>file:/C:/Controle-de-Almoxarifado/Almoxarifado/src/Controle/dao/ClienteDAO.java</file>
         </group>
     </open-files>
 </project-private>
