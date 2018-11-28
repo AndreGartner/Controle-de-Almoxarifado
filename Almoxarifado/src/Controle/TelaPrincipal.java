@@ -12,6 +12,7 @@ import Controle.dao.ProdDAO;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,14 +43,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TabelaProduto.getModel();
         TabelaProduto.setRowSorter(new TableRowSorter(modelo));
         readJTable();
-        DefaultTableModel modelos = (DefaultTableModel) TabelaProduto1.getModel();
-        TabelaProduto1.setRowSorter(new TableRowSorter(modelos));
-        readJTable1();
-        DefaultTableModel modeloCliente = (DefaultTableModel) TabelaEmprestimo.getModel();
-        TabelaEmprestimo.setRowSorter(new TableRowSorter(modeloCliente));
-        readCliente();
+        DefaultTableModel modelos = (DefaultTableModel) TabelaEmprestimo.getModel();
+        TabelaEmprestimo.setRowSorter(new TableRowSorter(modelos));
+        readEmprestimo();
         //TelaPrincipal tp = new TelaPrincipal();
         // tp.setSize(576, 255);
+        DefaultTableModel modelo1 = (DefaultTableModel) TabelaProduto2.getModel();
+        TabelaProduto2.setRowSorter(new TableRowSorter(modelo1));
+        readJTable2();
     }
 
     public void limpar() {
@@ -65,15 +66,74 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
 
-    public void readJTable1() {
+    public void readEmprestimo() {
+          Connection con = null;
+          PreparedStatement stmt = null;
+          ResultSet rs = null;
+          
+          
+          DefaultTableModel modelos = (DefaultTableModel) TabelaEmprestimo.getModel(); 
+          
+           modelos.setNumRows(0);
+            
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement("Select C.ID_CONTROLE, CLI.NOME_CLIENTE, \n"
+                    + "P.NOME_PRODUTO, P.TIPO_PRODUTO ,CP.Quantidade_produto, P.STATUS_PRODUTO, C.DATA_DE_ENTRADA, C.DATA_DE_SAIDA \n"
+                    + "FROM controle as C INNER JOIN cliente as CLI\n"
+                    + "ON CLI.ID_CLIENTE = C.Cliente_ID_CLIENTE \n"
+                    + "INNER JOIN controle_produto AS CP \n"
+                    + "ON C.ID_CONTROLE = CP.Controle_ID_CONTROLE \n"
+                    + "INNER JOIN PRODUTO AS P\n"
+                    + " ON CP.Produto_ID_PRODUTO = P.ID_PRODUTO\n"
+                    + " order by C.ID_CONTROLE DESC ");
+            JOptionPane.showMessageDialog(null, "FOI");
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){    
+                
+                modelos.addRow(new Object[]{
+                    
+                rs.getInt("ID_CONTROLE"),   
+                rs.getString("NOME_CLIENTE"),
+                rs.getString("NOME_PRODUTO"),
+                rs.getString("TIPO_PRODUTO"),
+                rs.getInt("Quantidade_produto"),
+                rs.getString("STATUS_PRODUTO"), 
+                rs.getString("DATA_DE_ENTRADA"),
+                rs.getString("DATA_DE_SAIDA")
+                        });
+            
+            }  
+            } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro!");
+        }}
 
-        DefaultTableModel modelos = (DefaultTableModel) TabelaProduto1.getModel();
-        modelos.setNumRows(0);
+    public void readCliente() {}
+//
+////        DefaultTableModel modeloCliente = (DefaultTableModel) TabelaEmprestimoCliente.getModel();
+//        modeloCliente.setNumRows(0);
+//        ClienteDAO cd = new ClienteDAO();
+//
+//        for (Cliente cliente : cd.read()) {
+//
+//            modeloCliente.addRow(new Object[]{
+//                
+//                cliente.getNomeCli()
+//                         });
+//        }
+//
+//    }
+public void readJTable2() {
+
+        DefaultTableModel modelo1 = (DefaultTableModel) TabelaProduto2.getModel();
+        modelo1.setNumRows(0);
         ProdDAO pd = new ProdDAO();
 
         for (ProdEstado pe : pd.read()) {
 
-            modelos.addRow(new Object[]{
+            modelo1.addRow(new Object[]{
                 pe.getIdProd(),
                 pe.getNomeProd(),
                 pe.getTipoProd(),
@@ -84,23 +144,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
     }
-
-    public void readCliente() {
-
-        DefaultTableModel modeloCliente = (DefaultTableModel) TabelaEmprestimo.getModel();
-        modeloCliente.setNumRows(0);
-        ClienteDAO cd = new ClienteDAO();
-
-        for (Cliente cliente : cd.read()) {
-
-            modeloCliente.addRow(new Object[]{
-                
-                cliente.getNomeCli()
-                         });
-        }
-
-    }
-
+    
     public void readJTable() {
 
         DefaultTableModel modelo = (DefaultTableModel) TabelaProduto.getModel();
@@ -154,8 +198,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtDataEntrada = new javax.swing.JTextField();
         BotaoInserir = new javax.swing.JButton();
         PainelEmprestimo = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaEmprestimo = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         txtIDEmprestimo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -171,9 +213,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         botaoemprestar = new javax.swing.JButton();
         botaodevolver = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TabelaProduto1 = new javax.swing.JTable();
+        TabelaEmprestimo = new javax.swing.JTable();
         cbTipo1 = new javax.swing.JComboBox<>();
         txtIDInvisivel = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TabelaProduto2 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastrar = new javax.swing.JMenu();
         MenuEmprestimoDevolucao = new javax.swing.JMenu();
@@ -206,7 +250,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
-        setPreferredSize(new java.awt.Dimension(576, 638));
+        setPreferredSize(new java.awt.Dimension(600, 398));
+        setSize(new java.awt.Dimension(600, 398));
 
         TabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -340,35 +385,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotaoInserir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(319, 319, 319))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(310, 310, 310))
         );
-
-        TabelaEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Cliente", "Produto retirado", "Tipo do Produto", "Data de Emprestimo", "Data de Devolução", "Situação do Produto"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TabelaEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabelaEmprestimoMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(TabelaEmprestimo);
 
         jLabel8.setText("ID");
 
@@ -398,7 +417,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        TabelaProduto1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome do Cliente", "Produto", "Tipo do produto", "Quantidade de produto", "Situação do produto", "Data de empréstimo", "Data de devolução"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TabelaEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaEmprestimoMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(TabelaEmprestimo);
+
+        cbTipo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descatável", "Reutilizável", " " }));
+
+        txtIDInvisivel.setEditable(false);
+
+        TabelaProduto2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -417,16 +466,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TabelaProduto1.addMouseListener(new java.awt.event.MouseAdapter() {
+        TabelaProduto2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabelaProduto1MouseClicked(evt);
+                TabelaProduto2MouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(TabelaProduto1);
-
-        cbTipo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descatável", "Reutilizável", " " }));
-
-        txtIDInvisivel.setEditable(false);
+        jScrollPane5.setViewportView(TabelaProduto2);
 
         javax.swing.GroupLayout PainelEmprestimoLayout = new javax.swing.GroupLayout(PainelEmprestimo);
         PainelEmprestimo.setLayout(PainelEmprestimoLayout);
@@ -435,15 +480,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(PainelEmprestimoLayout.createSequentialGroup()
                 .addGroup(PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelEmprestimoLayout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(botaoemprestar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaodevolver))
-                    .addGroup(PainelEmprestimoLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
                             .addGroup(PainelEmprestimoLayout.createSequentialGroup()
+                                .addGap(175, 175, 175)
+                                .addComponent(botaoemprestar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botaodevolver))
+                            .addGroup(PainelEmprestimoLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PainelEmprestimoLayout.createSequentialGroup()
                                         .addComponent(jLabel10)
@@ -475,11 +519,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                             .addComponent(jLabel14)
                                             .addComponent(jLabel13))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(txtDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(PainelEmprestimoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane3)))
                 .addContainerGap())
+            .addGroup(PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PainelEmprestimoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         PainelEmprestimoLayout.setVerticalGroup(
             PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,11 +558,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoemprestar)
                     .addComponent(botaodevolver))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
+            .addGroup(PainelEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelEmprestimoLayout.createSequentialGroup()
+                    .addContainerGap(234, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(32, 32, 32)))
         );
 
         MenuCadastrar.setText("Cadastrar");
@@ -559,21 +612,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PainelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PainelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PainelEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PainelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PainelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PainelEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -610,9 +663,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void MenuEmprestimoDevolucaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuEmprestimoDevolucaoMouseClicked
         PainelCadastrar.setVisible(false);
         PainelEmprestimo.setVisible(true);
-        TelaPrincipal tp = new TelaPrincipal();
-        tp.setSize(576, 255);// TODO add your handling code here:
-        txtIDInvisivel.setVisible(false);
+       txtIDInvisivel.setVisible(false);
+//        frame1 f = new frame1();
+//        f.setSize(700, 450);
+        
     }//GEN-LAST:event_MenuEmprestimoDevolucaoMouseClicked
 
     private void BotaoInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoInserirActionPerformed
@@ -653,7 +707,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         pd.inserir(pe);
 
                         readJTable();
-                        readJTable1();
+                        readEmprestimo();
                         limpar();
                     }
 
@@ -705,7 +759,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelaProdutoMouseClicked
 
     private void botaoemprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoemprestarActionPerformed
-        if (TabelaProduto1.getSelectedRow() != -1) {
+        if (TabelaEmprestimo.getSelectedRow() != -1) {
             ProdEstado pe = new ProdEstado();
             ProdDAO pd = new ProdDAO();
             pe.setStatusProduto("Indisponível");
@@ -715,7 +769,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, pe.getStatusProduto());
             pd.AlterarStatus(pe);
             readJTable();
-            readJTable1();
+            readEmprestimo();
             
             Cliente cliente = new Cliente();
             ClienteDAO cd = new ClienteDAO();
@@ -729,14 +783,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaoemprestarActionPerformed
 
-    private void TabelaProduto1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaProduto1MouseClicked
+    private void TabelaEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEmprestimoMouseClicked
         ProdEstado pe = new ProdEstado();
-        if (TabelaProduto1.getSelectedRow() != -1) {
-            DefaultTableModel modelos = (DefaultTableModel) TabelaProduto1.getModel();
+        if (TabelaEmprestimo.getSelectedRow() != -1) {
+            DefaultTableModel modelos = (DefaultTableModel) TabelaEmprestimo.getModel();
             String v0, v1, v2, v3, v4, v5;
-            v0 = TabelaProduto1.getValueAt(TabelaProduto1.getSelectedRow(), 0).toString();
-            v1 = TabelaProduto1.getValueAt(TabelaProduto1.getSelectedRow(), 1).toString();
-            v2 = TabelaProduto1.getValueAt(TabelaProduto1.getSelectedRow(), 2).toString();
+            v0 = TabelaEmprestimo.getValueAt(TabelaEmprestimo.getSelectedRow(), 0).toString();
+            v1 = TabelaEmprestimo.getValueAt(TabelaEmprestimo.getSelectedRow(), 1).toString();
+            v2 = TabelaEmprestimo.getValueAt(TabelaEmprestimo.getSelectedRow(), 2).toString();
 //            v3 = TabelaProduto.getValueAt(TabelaProduto.getSelectedRow(), 3).toString();
 //            v4 = TabelaProduto.getValueAt(TabelaProduto.getSelectedRow(), 4).toString();
 //            v5 = TabelaProduto.getValueAt(TabelaProduto.getSelectedRow(), 5).toString();
@@ -764,10 +818,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Você deve selecionar um produto!");
         }   // TODO add your handling code here:
-    }//GEN-LAST:event_TabelaProduto1MouseClicked
+    }//GEN-LAST:event_TabelaEmprestimoMouseClicked
 
     private void botaodevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaodevolverActionPerformed
-        if (TabelaProduto1.getSelectedRow() != -1) {
+        if (TabelaEmprestimo.getSelectedRow() != -1) {
             ProdEstado pe = new ProdEstado();
             ProdDAO pd = new ProdDAO();
             pe.setStatusProduto("Disponível");
@@ -778,7 +832,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, pe.getStatusProduto());
             pd.AlterarStatus(pe);
             readJTable();
-            readJTable1();
+            readEmprestimo();
             limpar();
         } else {
             JOptionPane.showMessageDialog(null, "SELECIONE UMA LINHA");
@@ -786,17 +840,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaodevolverActionPerformed
 
-    private void TabelaEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEmprestimoMouseClicked
-        if (TabelaEmprestimo.getSelectedRow() != -1) {
-            DefaultTableModel modeloCliente = (DefaultTableModel) TabelaEmprestimo.getModel();
-            String v1;
-            v1 = TabelaEmprestimo.getValueAt(TabelaEmprestimo.getSelectedRow(), 1).toString();
-            txtCliente.setText(v1);
-        } else {
-            JOptionPane.showMessageDialog(null, "Você deve selecionar um produto!");
-        }
-// TODO add your handling code here:
-    }//GEN-LAST:event_TabelaEmprestimoMouseClicked
+    private void TabelaProduto2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaProduto2MouseClicked
+        
+    }//GEN-LAST:event_TabelaProduto2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -843,7 +889,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel PainelEmprestimo;
     private javax.swing.JTable TabelaEmprestimo;
     private javax.swing.JTable TabelaProduto;
-    private javax.swing.JTable TabelaProduto1;
+    private javax.swing.JTable TabelaProduto2;
     private javax.swing.JButton botaodevolver;
     private javax.swing.JButton botaoemprestar;
     private javax.swing.JComboBox<String> cbOrigem;
@@ -869,9 +915,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtDataDevolucao;
