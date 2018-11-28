@@ -185,6 +185,8 @@ public class ProdDAO implements OverDAO<ProdEstado> {
                 pe.setDataEntradaProd(rs.getString("DATA_ENTRADA_PROD"));
                 pe.setStatusProduto(rs.getString("STATUS_PRODUTO"));
                 prode.add(pe);
+                
+            
 
             }
 
