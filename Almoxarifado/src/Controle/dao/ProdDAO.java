@@ -49,7 +49,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
 
         try {
 
-            stmt = con.prepareStatement("INSERT INTO produto (ID_PRODUTO, NOME_PRODUTO, TIPO_PRODUTO, ORIGEM_PRODUTO, DATA_ENTRADA_PROD,STATUS_PRODUTO) VALUES (?,?,?,?,?,?) ;");
+            stmt = con.prepareStatement("INSERT INTO produto (ID_PRODUTO, NOME_PRODUTO, TIPO_PRODUTO, ORIGEM_PRODUTO, DATA_ENTRADA_PROD,STATUS_PRODUTO,QUANTIDADE_PRODUTO_ENTRADO) VALUES (?,?,?,?,?,?,?) ;");
 
             stmt.setInt(1, objeto.getIdProd());
             stmt.setString(2, objeto.getNomeProd());
@@ -57,6 +57,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
             stmt.setString(4, objeto.getOrigemProd());
             stmt.setString(5, objeto.getDataEntradaProd());
             stmt.setString(6, objeto.getStatusProduto());
+            stmt.setInt(7,objeto.getQuantidade());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -88,15 +89,16 @@ public class ProdDAO implements OverDAO<ProdEstado> {
 
         try {
             stmt = con.prepareStatement("UPDATE Produto SET NOME_PRODUTO = ?, "
-                    + "TIPO_PRODUTO = ?, ORIGEM_PRODUTO = ?, DATA_ENTRADA_PROD = ?,STATUS_PRODUTO = ?"
+                    + "TIPO_PRODUTO = ?, ORIGEM_PRODUTO = ?, DATA_ENTRADA_PROD = ?,STATUS_PRODUTO = ?,QUANTIDADE_PRODUTO_ENTRADO=?"
                     + "WHERE ID_PRODUTO = ?;");
 
-            stmt.setInt(6, objeto.getIdProd());
+            stmt.setInt(7, objeto.getIdProd());
             stmt.setString(1, objeto.getNomeProd());
             stmt.setString(2, objeto.getTipoProd());
             stmt.setString(3, objeto.getOrigemProd());
             stmt.setString(5, objeto.getStatusProduto());
             stmt.setString(4, objeto.getDataEntradaProd());
+            stmt.setInt(6,objeto.getQuantidade());
 
             stmt.executeUpdate();
 
@@ -184,6 +186,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
                 pe.setOrigemProd(rs.getString("ORIGEM_PRODUTO"));
                 pe.setDataEntradaProd(rs.getString("DATA_ENTRADA_PROD"));
                 pe.setStatusProduto(rs.getString("STATUS_PRODUTO"));
+                pe.setQuantidade(rs.getInt("QUANTIDADE_PRODUTO_ENTRADO"));
                 prode.add(pe);
                 
             
@@ -244,7 +247,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
                 pe.setTipoProd(rs.getString("TIPO_PRODUTO"));
                 pe.setOrigemProd(rs.getString("ORIGEM_PRODUTO"));
                 pe.setDataEntradaProd(rs.getString("DATA_ENTRADA_PROD"));
-
+                pe.setQuantidade(rs.getInt("QUANTIDADE_PRODUTO_ENTRADO"));
                 prode.add(pe);
 
             }
@@ -302,7 +305,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
                 pe.setTipoProd(rs.getString("TIPO_PRODUTO"));
                 pe.setOrigemProd(rs.getString("ORIGEM_PRODUTO"));
                 pe.setDataEntradaProd(rs.getString("DATA_ENTRADA_PROD"));
-
+pe.setQuantidade(rs.getInt("QUANTIDADE_PRODUTO_ENTRADO"));
                 prode.add(pe);
 
             }
@@ -360,7 +363,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
                 pe.setTipoProd(rs.getString("TIPO_PRODUTO"));
                 pe.setOrigemProd(rs.getString("ORIGEM_PRODUTO"));
                 pe.setDataEntradaProd(rs.getString("DATA_ENTRADA_PROD"));
-
+pe.setQuantidade(rs.getInt("QUANTIDADE_PRODUTO_ENTRADO"));
                 prode.add(pe);
 
             }
@@ -418,7 +421,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
                 pe.setTipoProd(rs.getString("TIPO_PRODUTO"));
                 pe.setOrigemProd(rs.getString("ORIGEM_PRODUTO"));
                 pe.setDataEntradaProd(rs.getString("DATA_ENTRADA_PROD"));
-
+pe.setQuantidade(rs.getInt("QUANTIDADE_PRODUTO_ENTRADO"));
                 prode.add(pe);
 
             }

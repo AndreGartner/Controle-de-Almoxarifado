@@ -173,6 +173,8 @@ public class Login extends javax.swing.JFrame {
 		//ver se encontra no banco de dados
 		if (rs.next()) {
 		JOptionPane.showMessageDialog(null, "Usuário logado");
+                f.setIdFunc(rs.getInt("ID_FUNCIONARIO"));
+                JOptionPane.showMessageDialog(null, "O seu código é: " +f.getIdFunc());
                //chama a tela principal
                 TelaPrincipal a = new TelaPrincipal();
                 a.setVisible(true);
@@ -182,10 +184,15 @@ public class Login extends javax.swing.JFrame {
 		}
 		//fechar o prepareStatement
 		stmt.close();
+                     
+                             
+               
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
+           
+       
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -227,6 +234,8 @@ public class Login extends javax.swing.JFrame {
 		ResultSet rs = stmt.executeQuery();
 		//ver se encontra no banco de dados
 		if (rs.next()) {
+                     f.setIdFunc(rs.getInt("ID_FUNCIONARIO"));
+                JOptionPane.showMessageDialog(null, "O seu código é: " + f.getIdFunc());
 		JOptionPane.showMessageDialog(null, "Usuário logado");
                //chama a tela principal
                 TelaPrincipal a = new TelaPrincipal();
@@ -258,6 +267,8 @@ public class Login extends javax.swing.JFrame {
 		//ver se encontra no banco de dados
 		if (rs.next()) {
 		JOptionPane.showMessageDialog(null, "Usuário logado");
+                f.setIdFunc(rs.getInt("ID_FUNCIONARIO"));
+                JOptionPane.showMessageDialog(null, "O seu código é: " + f.getIdFunc());
                //chama a tela principal
                 TelaPrincipal a = new TelaPrincipal();
                 a.setVisible(true);

@@ -191,14 +191,14 @@ public class EmprestimoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT DATA_DE_ENTRADA, DATA_DE_SAIDA FROM Controle;");
+            stmt = con.prepareStatement("SELECT DATA_DE_DEVOLUCAO, DATA_DE_EMPRESTIMO FROM Controle;");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Controle cont = new Controle();
 
-                cont.SetDataEntrada(rs.getString("DATA_DE_ENTRADA"));
-                cont.setDataSaida(rs.getString("DATA_DE_SAIDA"));
+                cont.setDataDevolucao(rs.getString("DATA_DE_DEVOLUCAO"));
+                cont.setDataEmprestimo(rs.getString("DATA_DE_EMPRESTIMO"));
                 cnt.add(cont);
 
             }

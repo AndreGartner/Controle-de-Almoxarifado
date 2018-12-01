@@ -130,6 +130,37 @@ public List<Cliente> read() {
 
     }
 
+    public String readIDCli(String NomeCli){
+         
+       
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Cliente c = new Cliente();
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement("SELECT ID_CLIENTE FROM cliente WHERE NOME_CLIENTE LIKE ?");
+            stmt.setString(1, NomeCli);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                
+                c.setIdCli(rs.getInt("ID_CLIENTE"));
+             
+                
+                JOptionPane.showMessageDialog(null, c.getIdCli());
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possível capturar o valor do ID!");
+        }
+        return null;
+        
+       
+       
+    }
+
 
     
 }

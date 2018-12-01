@@ -18,6 +18,7 @@ public class ProdEstado {
     private String TipoProd;
     private String OrigemProd;
     private String DataEntradaProd;
+    private int Quantidade;
 private String StatusProduto;
 
      public String getStatusProduto(){
@@ -65,6 +66,20 @@ private String StatusProduto;
 
     public void setDataEntradaProd(String DataEntradaProd) {
         this.DataEntradaProd = DataEntradaProd;
+    }
+
+    /**
+     * @return the Quantidade
+     */
+    public int getQuantidade() {
+        return Quantidade;
+    }
+
+    /**
+     * @param Quantidade the Quantidade to set
+     */
+    public void setQuantidade(int Quantidade) {
+        this.Quantidade = Quantidade;
     }
 
 
