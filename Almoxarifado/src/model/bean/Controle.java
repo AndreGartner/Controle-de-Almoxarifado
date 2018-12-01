@@ -16,26 +16,13 @@ import java.util.Date;
  */
 public class Controle {
     private int IdControle;
-    private String DataEntrada;
-    private String DataSaida;
-    private String fkclient;
-    private String fkfunc;
+    private String DataDevolucao;
+    private String DataEmprestimo;
+//    private int IdFunc; 
+    private Cliente cliente;
+    private Funcionario funcionario;
 
-    public String getfkclient() {
-        return fkclient;
-    }
 
-    public void setfkclient(String fkclient) {
-        this.fkclient = fkclient;
-    }
-
-    public String getfkfunc() {
-        return fkfunc;
-    }
-
-    public void setfkfunc(String fkfunc) {
-        this.fkfunc = fkfunc;
-    }
 
     public int getIdControle() {
         return IdControle;
@@ -46,21 +33,69 @@ public class Controle {
 
     }
 
-    public String getDataEntrada() {
-        return DataEntrada;
+    /**
+     * @return the DataDevolucao
+     */
+    public String getDataDevolucao() {
+        return DataDevolucao;
     }
 
-    public void SetDataEntrada(String DataEntrada) {
-        this.DataEntrada = DataEntrada;
+    /**
+     * @param DataDevolucao the DataDevolucao to set
+     */
+    public void setDataDevolucao(String DataDevolucao) {
+        this.DataDevolucao = DataDevolucao;
     }
 
-    public String getDataSaida() {
-        return DataSaida;
+    /**
+     * @return the DataEmprestimo
+     */
+    public String getDataEmprestimo() {
+        return DataEmprestimo;
     }
 
-    public void setDataSaida(String DataSaida) {
-        this.DataSaida = DataSaida;
+    /**
+     * @param DataEmprestimo the DataEmprestimo to set
+     */
+    public void setDataEmprestimo(String DataEmprestimo) {
+        this.DataEmprestimo = DataEmprestimo;
     }
+
+    /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the funcionario
+     */
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    /**
+     * @param funcionario the funcionario to set
+     */
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+   
+
+    
+
+   
+
+   
 
  
     

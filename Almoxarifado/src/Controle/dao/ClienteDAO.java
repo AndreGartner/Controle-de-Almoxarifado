@@ -8,11 +8,15 @@ package Controle.dao;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.Cliente;
+import model.bean.ProdEstado;
 
 /**
  *
@@ -28,7 +32,7 @@ public class ClienteDAO implements OverDAO<Cliente>{
         try {
             con = ConnectionFactory.getConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(ProdDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         PreparedStatement stmt = null;
@@ -57,7 +61,7 @@ public class ClienteDAO implements OverDAO<Cliente>{
             try {
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProdDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
        return 0;         
@@ -72,7 +76,90 @@ public class ClienteDAO implements OverDAO<Cliente>{
     public void excluir(Cliente objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+public List<Cliente> read() {
 
+        Connection con = null;
+        try {
+
+            con = ConnectionFactory.getConnection();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        List<Cliente> clientes = new ArrayList<>();
+
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM cliente;");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+
+                cliente.setIdCli(rs.getInt("ID_CLIENTE"));
+                cliente.setNomeCli(rs.getString("NOME_CLIENTE"));
+                clientes.add(cliente);
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro com a conexão da tabela!!");
+        } finally {
+            ConnectionFactory.Disconnect();
+
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return clientes;
+
+    }
+
+    public String readIDCli(String NomeCli){
+         
+       
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Cliente c = new Cliente();
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement("SELECT ID_CLIENTE FROM cliente WHERE NOME_CLIENTE LIKE ?");
+            stmt.setString(1, NomeCli);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                
+                c.setIdCli(rs.getInt("ID_CLIENTE"));
+             
+                
+                JOptionPane.showMessageDialog(null, c.getIdCli());
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possível capturar o valor do ID!");
+        }
+        return null;
+        
+       
+       
+    }
 
 
     

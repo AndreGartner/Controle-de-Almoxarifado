@@ -5,14 +5,13 @@
  */
 package Controle.dao;
 
-import Controle.Emprestimo;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.bean.Controle;
-import Controle.ProdutosDoEstado;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,10 +42,12 @@ public class ControleDAO implements OverDAO<Controle> {
 
         try {
             Funcionario f = new Funcionario();
-            Emprestimo e = new Emprestimo();
+
             Cliente cli = new Cliente();
             Controle c = new Controle();
-           /* int fk; String fks;
+            ClienteDAO cd = new ClienteDAO();
+            FuncionarioDAO fd = new FuncionarioDAO();
+            /* int fk; String fks;
             fk = cli.getIdCli();
             fks = String.valueOf(fk);
             c.setfkclient(fks);
@@ -55,13 +56,17 @@ public class ControleDAO implements OverDAO<Controle> {
             fkp = f.getIdFunc();
             fksp = String.valueOf(fkp);
             c.setfkfunc(fksp);*/
-           c.setfkclient(String.valueOf(cli.getIdCli()));
-            
-            stmt = con.prepareStatement("INSERT INTO controle (DATA_DE_ENTRADA,DATA_DE_SAIDA,Cliente_ID_CLIENTE,Funcionario_ID_FUNCIONARIO) VALUES (?,?,?,?);");
-            stmt.setString(1, objeto.getDataEntrada());
-            stmt.setString(2, objeto.getDataSaida());
-            stmt.setString(3, objeto.getfkclient());
-            stmt.setString(4, objeto.getfkfunc());
+//           c.setfkclient(String.valueOf(cli.getIdCli()));
+            cd.readIDCli(cli.getNomeCli());
+
+            fd.readIDFunc(f.getIdFunc());
+
+            stmt = con.prepareStatement("INSERT INTO controle (ID_CONTROLE,DATA_DE_DEVOLUCAO,DATA_DE_EMPRESTIMO,Cliente_ID_CLIENTE,Funcionario_ID_FUNCIONARIO) VALUES (?,?,?,?,?);");
+            stmt.setInt(1, objeto.getIdControle());
+            stmt.setString(2, objeto.getDataDevolucao());
+            stmt.setString(3, objeto.getDataEmprestimo());
+            stmt.setInt(4, objeto.getCliente().getIdCli());
+            stmt.setInt(5, objeto.getFuncionario().getIdFunc());
 
             stmt.executeUpdate();
 
@@ -90,10 +95,10 @@ public class ControleDAO implements OverDAO<Controle> {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE Controle SET  DATA_DE_ENTRADA = ?, "
-                    + "DATA_DE_SAIDA = ? WHERE ID_CONTROLE = ?;");
-            stmt.setString(1, objeto.getDataEntrada());
-            stmt.setString(2, objeto.getDataSaida());
+            stmt = con.prepareStatement("UPDATE Controle SET  DATA_DE_DEVOLUCAO = ?, "
+                    + "DATA_DE_EMPRESTIMO = ? WHERE ID_CONTROLE = ?;");
+            stmt.setString(1, objeto.getDataDevolucao());
+            stmt.setString(2, objeto.getDataEmprestimo());
             stmt.setInt(3, objeto.getIdControle());
             stmt.executeUpdate();
         } catch (SQLException ex) {
