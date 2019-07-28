@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model.bean;
-
 /**
  *
  * @author rosan
  */
+package model.bean;
+
 public class Funcionario {
     private int IdFunc;
     private String NomeFunc;
     private String SenhaFunc;
     
-        public int getIdFunc() {
+    public int getIdFunc() {
         return IdFunc;
     }
 
@@ -37,6 +32,5 @@ public class Funcionario {
     public void setSenhaFunc(String SenhaFunc) {
         this.SenhaFunc = SenhaFunc;
     }
-
     
 }

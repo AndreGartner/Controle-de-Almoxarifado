@@ -6,6 +6,7 @@
 package Controle.dao;
 
 import connection.ConnectionFactory;
+import static connection.ConnectionFactory.con;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,151 +17,159 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.Cliente;
-import model.bean.ProdEstado;
 
 /**
  *
  * @author Andre
  */
 public class ClienteDAO implements OverDAO<Cliente>{
-    
-    Cliente cli = new Cliente();
+    Cliente cliente = new Cliente();        
+    private PreparedStatement stmt;
+    private ResultSet rs;
 
+    /**
+     * Cria um objeto
+     * 
+     * @param objeto
+     * @return 
+     */
     @Override
-    public int inserir(Cliente objeto) {
-        Connection con = null;
+    public int inserir(Cliente objeto) 
+    {
         try {
-            con = ConnectionFactory.getConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        PreparedStatement stmt = null;
-        
-        
-        try {
+            ConnectionFactory.getConnection();
+
             stmt = con.prepareStatement("INSERT INTO cliente (ID_CLIENTE, NOME_CLIENTE) VALUES (?,?);");
             
-            stmt.setInt(1, objeto.getIdCli());
+            stmt.setString(1, objeto.getIdCli());
             stmt.setString(2, objeto.getNomeCli());
-
             
             stmt.executeUpdate();
             
-            
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-                    
-                    
-         } catch (SQLException ex) {
-                        
-            JOptionPane.showMessageDialog(null, "Erro ao salvar!"+ex);
-            
-     
-   
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar!");
+            System.err.println(ex.getMessage());
         }
+        
        return 0;         
     }
 
+    /**
+     * Atualiza objeto
+     * 
+     * @param objeto
+     * @return 
+     */
     @Override
-    public int alterar(Cliente objeto) {
+    public int alterar(Cliente objeto)
+    {
+        //TODO: Criar método alterar()
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Excluir objeto
+     * 
+     * @param objeto 
+     */
     @Override
-    public void excluir(Cliente objeto) {
+    public void excluir(Cliente objeto) 
+    {
+        //TODO: Criar método excluir()
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-public List<Cliente> read() {
+    
+    /**
+     * Listar Clientes pelo nome
+     * 
+     * @param NomeCli
+     * @return mixed
+     * @throws SQLException 
+     */
+    public List<Cliente> obterPeloNome(String NomeCli) throws SQLException 
+    {
+        List<Cliente> clientesList = new ArrayList<>();
 
-        Connection con = null;
         try {
-
             con = ConnectionFactory.getConnection();
 
-        } catch (SQLException ex) {
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE NOME_CLIENTE LIKE ?");
+            stmt.setString(1, "%" + NomeCli + "%");
 
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        PreparedStatement stmt = null;
-
-        ResultSet rs = null;
-
-        List<Cliente> clientes = new ArrayList<>();
-
-        try {
-
-            stmt = con.prepareStatement("SELECT * FROM cliente;");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Cliente cliente = new Cliente();
-
-                cliente.setIdCli(rs.getInt("ID_CLIENTE"));
+                cliente.setIdCli(rs.getString("ID_CLIENTE"));
                 cliente.setNomeCli(rs.getString("NOME_CLIENTE"));
-                clientes.add(cliente);
-
+                
+                clientesList.add(cliente);
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro com a conexão da tabela!!");
-        } finally {
-            ConnectionFactory.Disconnect();
-
-            try {
-                stmt.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                rs.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            throw new SQLException("Não foi possivel listar os clientes!", ex);
         }
 
-        return clientes;
+        return clientesList;
+    }
+        
+    /**
+     * Listar clientes
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public List<Cliente> read() throws SQLException 
+    {
+        List<Cliente> clientesList = new ArrayList<>();
 
+        try {
+            ConnectionFactory.getConnection();
+            
+            stmt = con.prepareStatement("SELECT * FROM cliente;");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                cliente.setIdCli(rs.getString("ID_CLIENTE"));
+                cliente.setNomeCli(rs.getString("NOME_CLIENTE"));
+                clientesList.add(cliente);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro com a conexão da tabela!!");
+            throw new SQLException(ex);
+        }
+
+        return clientesList;
     }
 
-    public String readIDCli(String NomeCli){
-         
-       
-        Connection con = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Cliente c = new Cliente();
-        
+    /**
+     * Buscar por nome
+     * 
+     * @param NomeCli
+     * @return
+     * @throws SQLException 
+     */
+    public String readIDCli(String NomeCli) throws SQLException
+    {
         try {
-            con = ConnectionFactory.getConnection();
+            ConnectionFactory.getConnection();
+            
             stmt = con.prepareStatement("SELECT ID_CLIENTE FROM cliente WHERE NOME_CLIENTE LIKE ?");
             stmt.setString(1, NomeCli);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
-                
-                c.setIdCli(rs.getInt("ID_CLIENTE"));
-             
-                
-                JOptionPane.showMessageDialog(null, c.getIdCli());
-                
+                cliente.setIdCli(rs.getString("ID_CLIENTE"));
+                JOptionPane.showMessageDialog(null, cliente.getIdCli());
             }
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Não foi possível capturar o valor do ID!");
+            throw new SQLException(ex);
         }
-        return null;
         
-       
-       
+        return cliente.getIdCli();
     }
-
-
-    
 }

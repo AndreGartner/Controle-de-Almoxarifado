@@ -1,32 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author rosan
  */
 package Controle;
 
-import Controle.dao.ControleDAO;
-import Controle.dao.ControleProdDAO;
-import Controle.dao.EmprestimoDAO;
 import Controle.dao.ProdDAO;
 import connection.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.bean.Controle;
-import model.bean.ControleProd;
 import model.bean.ProdEstado;
 
-/**
- *
- * @author rosan
- */
 public class Consulta extends javax.swing.JFrame {
+    ProdDAO produtoDAO = new ProdDAO();
+    ProdEstado prodEstado = new ProdEstado();
 
     /**
      * Creates new form Consulta
@@ -40,109 +26,79 @@ public class Consulta extends javax.swing.JFrame {
 
     }
 
-    public void readJTable() {
-
+    private void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
-        ProdDAO pd = new ProdDAO();
 
-        for (ProdEstado pe : pd.read()) {
-
+        produtoDAO.read().forEach((pe) -> {
             modelo.addRow(new Object[]{
                 pe.getIdProd(),
                 pe.getNomeProd(),
                 pe.getTipoProd(),
                 pe.getOrigemProd(),
                 pe.getDataEntradaProd()
-
             });
-
-        }
-
+        });
     }
 
-    public void readJTableForNomeprod(String Nomeprod) {
-
+    private void readJTableForNomeprod(String Nomeprod) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
-        ProdDAO pd = new ProdDAO();
 
-        for (ProdEstado pe : pd.obterPeloNome(Nomeprod)) {
-
+        produtoDAO.obterPeloNome(Nomeprod).forEach((pe) -> {
             modelo.addRow(new Object[]{
                 pe.getIdProd(),
                 pe.getNomeProd(),
                 pe.getTipoProd(),
                 pe.getOrigemProd(),
                 pe.getDataEntradaProd()
-
             });
-
-        }
-
+        });
     }
 
-    public void readJTableForTipoprod(String Tipoprod) {
-
+    private void readJTableForTipoprod(String Tipoprod) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
-        ProdDAO pd = new ProdDAO();
 
-        for (ProdEstado pe : pd.obterPeloTipo(Tipoprod)) {
-
+        produtoDAO.obterPeloTipo(Tipoprod).forEach((pe) -> {
             modelo.addRow(new Object[]{
                 pe.getIdProd(),
                 pe.getNomeProd(),
                 pe.getTipoProd(),
                 pe.getOrigemProd(),
                 pe.getDataEntradaProd()
-
             });
-
-        }
-
+        });
     }
 
-    public void readJTableForOrigemprod(String Origemprod) {
-
+    private void readJTableForOrigemprod(String Origemprod) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
-        ProdDAO pd = new ProdDAO();
 
-        for (ProdEstado pe : pd.obterPeloOrigem(Origemprod)) {
-
+        produtoDAO.obterPeloOrigem(Origemprod).forEach((pe) -> {
             modelo.addRow(new Object[]{
                 pe.getIdProd(),
                 pe.getNomeProd(),
                 pe.getTipoProd(),
                 pe.getOrigemProd(),
                 pe.getDataEntradaProd()
-
             });
-
-        }
-
+        });
     }
 
-    public void readJTableForDataEntradaprod(String Dataentradaprod) {
-
+    private void readJTableForDataEntradaprod(String Dataentradaprod) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
-        ProdDAO pd = new ProdDAO();
 
-        for (ProdEstado pe : pd.obterPeloDataEntrada(Dataentradaprod)) {
-
+        produtoDAO.obterPeloDataEntrada(Dataentradaprod).forEach((pe) -> {
             modelo.addRow(new Object[]{
                 pe.getIdProd(),
                 pe.getNomeProd(),
                 pe.getTipoProd(),
                 pe.getOrigemProd(),
                 pe.getDataEntradaProd()
-
             });
-
-        }
-
+        });
     }
 
     /**
@@ -358,145 +314,87 @@ public class Consulta extends javax.swing.JFrame {
 
     private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-
-            ProdDAO pd = new ProdDAO();
-//         Chama o método Override para pesquisar por Nome do produto
+            // Chama o método Override para pesquisar por Nome do produto
             readJTableForNomeprod(txtNome.getText());
-
             // faz qualquer coisa que você quiser  
             txtNome.doLayout();
-
-        }          // TODO add your handling code here:
+        }         
     }//GEN-LAST:event_txtNomeKeyPressed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        if (jTable1.getSelectedRow() != -1) {
-
-            PreparedStatement stmt = null;
-            ProdDAO pd = new ProdDAO();
-            ProdDAO dao = new ProdDAO();
-            ControleDAO dao1 = new ControleDAO();
-            ControleProdDAO dao2 = new ControleProdDAO();
-//        Criando objetos para as classes localizados os atributos e os getters e setters
-            ProdEstado pe = new ProdEstado();
-            ControleProd controleprod = new ControleProd();
-            Controle controle = new Controle();
-//        Chamando a conexão do banco de dados
-            Connection con = null;
-
-            try {
-                ConnectionFactory.getConnection();
-
-                pe.setIdProd((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-
-                dao.excluir(pe);
-
-                txtNome.setText("");
-                txtDataEntrada.setText("");
-
-                readJTable();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
+        if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Você deve selecionar um produto!");
+            return;
         }
 
+        prodEstado.setIdProd((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        produtoDAO.excluir(prodEstado);
+        txtNome.setText("");
+        txtDataEntrada.setText("");
+        readJTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        if (jTable1.getSelectedRow() != -1) {
-            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            String v0, v1, v2, v3, v4, v5;
-            v0 = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            v1 = jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString();
-            v2 = jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString();
-            v3 = jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString();
-            v4 = jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString();
-            txtID.setText(v0);
-            txtNome.setText(v1);
-            txtDataEntrada.setText(v4);
-
-            if (v3.equals("Descartável")) {
-                cbTipo.setSelectedIndex(0);
-            } else {
-                cbTipo.setSelectedIndex(1);
-            }
-            if (v3.equals("Estado")) {
-                cbOrigem.setSelectedIndex(0);
-            } else {
-                cbOrigem.setSelectedIndex(1);
-            }
-
-            //         txtDataEntrada.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-            //           String bct = jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString();
-//            cbOrigem.setSelectedItem(jTable1.getValueAt(jTable1.getSelectedRow(), 3));           
-//            txtDataEntrada.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-//            JOptionPane.showMessageDialog(null, jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-        } else {
+        if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Você deve selecionar um produto!");
+            return;
         }
+        
+        String v0, v1, v3, v4;
+        v0 = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        v1 = jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        v3 = jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString();
+        v4 = jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString();
+        txtID.setText(v0);
+        txtNome.setText(v1);
+        txtDataEntrada.setText(v4);
 
+        if (v3.equals("Descartável")) {
+            cbTipo.setSelectedIndex(0);
+        } else {
+            cbTipo.setSelectedIndex(1);
+        }
+        if (v3.equals("Estado")) {
+            cbOrigem.setSelectedIndex(0);
+        } else {
+            cbOrigem.setSelectedIndex(1);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-
-        PreparedStatement stmt = null;
-        ProdDAO pd = new ProdDAO();
-        ProdDAO dao = new ProdDAO();
-        ControleDAO dao1 = new ControleDAO();
-        ControleProdDAO dao2 = new ControleProdDAO();
-//        Criando objetos para as classes localizados os atributos e os getters e setters
-        ProdEstado pe = new ProdEstado();
-        ControleProd controleprod = new ControleProd();
-        Controle controle = new Controle();
-//        Chamando a conexão do banco de dados
-        Connection con = null;
-        try {
-            ConnectionFactory.getConnection();
-            pe.setOrigemProd(String.valueOf(cbOrigem.getSelectedItem()));
-            pe.setTipoProd(String.valueOf(cbTipo.getSelectedItem()));
-//        Validação para se os campos estão sendo preechidos ou não(vale para todos os campos!!r)
-            if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Campo nome inválido!");
-            } else {
-                if ((txtDataEntrada.getText() == null || txtDataEntrada.getText().trim().equals(""))) {
-                    JOptionPane.showMessageDialog(null, "Você deve escrever no formato de uma data!");
-                } else {
-                    pe.setNomeProd(txtNome.getText());
-                    pe.setDataEntradaProd(ConnectionFactory.formatDate(txtDataEntrada.getText()));
-                    pe.setIdProd(Integer.parseInt(txtID.getText()));
-                    if (pe.getDataEntradaProd() == null) {
-                        JOptionPane.showMessageDialog(null, "A Data deve condizer com a realidade!!");
-                    } else {
-                        dao.alterar(pe);
-                        txtNome.setText("");
-                        txtDataEntrada.setText("");
-                        readJTable();
-                    }
-                }
-            }
-
-            //dao1.inserir(controle);
-            //dao2.inserir(controleprod);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo nome inválido!");
+            return;
         }
-
+        
+        if ((txtDataEntrada.getText() == null || txtDataEntrada.getText().trim().equals(""))) {
+            JOptionPane.showMessageDialog(null, "Você deve escrever no formato de uma data!");
+            return;
+        } 
+        
+        prodEstado.setOrigemProd(String.valueOf(cbOrigem.getSelectedItem()));
+        prodEstado.setTipoProd(String.valueOf(cbTipo.getSelectedItem()));
+        prodEstado.setNomeProd(txtNome.getText());
+        prodEstado.setDataEntradaProd(ConnectionFactory.formatDate(txtDataEntrada.getText()));
+        prodEstado.setIdProd(Integer.parseInt(txtID.getText()));
+        
+        if (prodEstado.getDataEntradaProd() == null) {
+            JOptionPane.showMessageDialog(null, "A Data deve condizer com a realidade!!");
+            return;
+        } 
+        
+        produtoDAO.alterar(prodEstado);
+        txtNome.setText("");
+        txtDataEntrada.setText("");
+        readJTable();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-
         readJTableForTipoprod(String.valueOf(cbTipo.getSelectedItem()));
-
     }//GEN-LAST:event_cbTipoActionPerformed
 
     private void cbOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrigemActionPerformed
@@ -505,16 +403,11 @@ public class Consulta extends javax.swing.JFrame {
 
     private void txtDataEntradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataEntradaKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-
-            ProdDAO pd = new ProdDAO();
-            //         Chama o método Override para pesquisar por Nome do produto
             readJTableForDataEntradaprod(txtDataEntrada.getText());
-
-            // faz qualquer coisa que você quiser
-            txtDataEntrada.doLayout();        // TODO add your handling code here:
+            txtDataEntrada.doLayout();        
+        }
     }//GEN-LAST:event_txtDataEntradaKeyPressed
-    }
-
+        
     /**
      * @param args the command line arguments
      */
@@ -543,10 +436,8 @@ public class Consulta extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Consulta().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Consulta().setVisible(true);
         });
     }
 

@@ -1,28 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model.bean;
-
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import java.util.Date;
-
 /**
- *
  * @author @author Andre Luiz Gärtner, Yuji Faruk Murakami Feles, Alex Oliveira Fernandes, Eduardo Tavares Hauck, João Victor Küster Cardoso
  * INFEM302
  * CEDUPHH
  */
+package model.bean;
+
 public class Controle {
     private int IdControle;
     private String DataDevolucao;
     private String DataEmprestimo;
-//    private int IdFunc; 
     private Cliente cliente;
     private Funcionario funcionario;
-
-
 
     public int getIdControle() {
         return IdControle;
@@ -30,7 +18,6 @@ public class Controle {
 
     public void setIdControle(int IdControle) {
         this.IdControle = IdControle;
-
     }
 
     /**
@@ -88,15 +75,5 @@ public class Controle {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-
-   
-
-    
-
-   
-
-   
-
- 
     
 }

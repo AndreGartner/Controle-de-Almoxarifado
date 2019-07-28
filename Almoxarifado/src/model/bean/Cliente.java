@@ -1,24 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model.bean;
-
 /**
  *
  * @author Andre
  */
+package model.bean;
+
 public class Cliente {
-    
-    private int IdCliente;
+    private String IdCliente;
     private String NomeCli;
     
-    public int getIdCli(){
+    public String getIdCli(){
         return IdCliente;
     }
     
-    public void setIdCli(int IdCli){
+    public void setIdCli(String IdCli){
         this.IdCliente = IdCli;
     }
     
@@ -29,10 +23,4 @@ public class Cliente {
     public void setNomeCli(String NomeCli){
         this.NomeCli = NomeCli;
     }
-   
-    
-    
-    
-    
-    
 }

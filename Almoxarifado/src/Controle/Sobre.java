@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Controle;
-
 /**
  *
  * @author rosan
  */
+package Controle;
+
 public class Sobre extends javax.swing.JFrame {
 
     /**
@@ -223,21 +218,20 @@ public class Sobre extends javax.swing.JFrame {
 
     private void MenuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSobreMouseClicked
         new Sobre().setVisible(true);
-        dispose();        // TODO add your handling code here:
+        dispose();        
     }//GEN-LAST:event_MenuSobreMouseClicked
 
     private void MenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSobreActionPerformed
-
     }//GEN-LAST:event_MenuSobreActionPerformed
 
     private void MenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSairMouseClicked
-        System.exit(0);        // TODO add your handling code here:
+        System.exit(0);        
     }//GEN-LAST:event_MenuSairMouseClicked
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         TelaPrincipal tp = new TelaPrincipal();
         tp.setVisible(true);
-        dispose();// TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
@@ -268,10 +262,8 @@ public class Sobre extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Sobre().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Sobre().setVisible(true);
         });
     }
 

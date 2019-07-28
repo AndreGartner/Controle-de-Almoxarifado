@@ -1,25 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author rosan
  */
 package Controle;
 
 import connection.ConnectionFactory;
-import static connection.ConnectionFactory.Login;
-import static connection.ConnectionFactory.con;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.Funcionario;
 
-/**
- *
- * @author rosan
- */
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -28,6 +20,32 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    /**
+     * Faz Login
+     */
+    private void verifyUser() 
+    {
+        try {
+            Funcionario funcionario = new Funcionario();
+            funcionario.setNomeFunc(jTextField1.getText());
+            funcionario.setSenhaFunc(new String(jPasswordField1.getPassword()));
+            boolean response = ConnectionFactory.Login(funcionario);
+            Random random = new Random(); 
+            int n = random.nextInt(9999);
+            if (response) {
+                JOptionPane.showMessageDialog(null, "O seu código é: " + n);
+                TelaPrincipal telaPrincipal = new TelaPrincipal();
+                telaPrincipal.setVisible(true);
+                dispose();
+                return;
+            }
+            
+            JOptionPane.showMessageDialog(null, "Dados Inválidos");
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -160,39 +178,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
-       try {
-            Funcionario f = new Funcionario();
-            ConnectionFactory.getConnection();
-             PreparedStatement stmt = null;
-                 stmt = con.prepareStatement("Select * from Funcionario WHERE NOME_FUNCIONARIO = ? AND SENHA_FUNCIONARIO = ?");
-                 stmt.setString(1, jTextField1.getText());
-                 stmt.setString(2, new String(jPasswordField1.getPassword()));
-                //capturar os resultados do select
-		ResultSet rs = stmt.executeQuery();
-		//ver se encontra no banco de dados
-		if (rs.next()) {
-		JOptionPane.showMessageDialog(null, "Usuário logado");
-                f.setIdFunc(rs.getInt("ID_FUNCIONARIO"));
-                JOptionPane.showMessageDialog(null, "O seu código é: " +f.getIdFunc());
-               //chama a tela principal
-                TelaPrincipal a = new TelaPrincipal();
-                a.setVisible(true);
-                dispose();
-                }else{
-		JOptionPane.showMessageDialog(null, "Dados Inválidos");
-		}
-		//fechar o prepareStatement
-		stmt.close();
-                     
-                             
-               
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
-       
+        verifyUser();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -200,88 +186,29 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-
-       boolean i;
-       int opcao;
         String senhaadministrativa = JOptionPane.showInputDialog("Você precisa do acesso administrativo para o cadastramento.", JOptionPane.YES_NO_OPTION);
         String verificacao = "123456";
-      
        
-       
-          if (senhaadministrativa.equals(verificacao)) {
-            Cadastro cad = new Cadastro();
-            cad.setVisible(true);
-            dispose();
-        }else{
-                JOptionPane.showMessageDialog(null, "Senha inválida. Tente novamente.");}  
+        if (!senhaadministrativa.equals(verificacao)) {
+            JOptionPane.showMessageDialog(null, "Senha inválida. Tente novamente.");
+            return;
+        }  
         
-        
-        
-       
+        Cadastro cad = new Cadastro();
+        cad.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
-         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) { 
-//           JOptionPane.showMessageDialog(null, "Enter Pressionado");  
-       try {
-            Funcionario f = new Funcionario();
-            ConnectionFactory.getConnection();
-             PreparedStatement stmt = null;
-                 stmt = con.prepareStatement("Select * from Funcionario WHERE NOME_FUNCIONARIO = ? AND SENHA_FUNCIONARIO = ?");
-                 stmt.setString(1, jTextField1.getText());
-                 stmt.setString(2, new String(jPasswordField1.getPassword()));
-                //capturar os resultados do select
-		ResultSet rs = stmt.executeQuery();
-		//ver se encontra no banco de dados
-		if (rs.next()) {
-                     f.setIdFunc(rs.getInt("ID_FUNCIONARIO"));
-                JOptionPane.showMessageDialog(null, "O seu código é: " + f.getIdFunc());
-		JOptionPane.showMessageDialog(null, "Usuário logado");
-               //chama a tela principal
-                TelaPrincipal a = new TelaPrincipal();
-                a.setVisible(true);
-                dispose();
-                }else{
-		JOptionPane.showMessageDialog(null, "Dados Inválidos");
-		}
-		//fechar o prepareStatement
-		stmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) { 
+            verifyUser();
+        }
     }//GEN-LAST:event_jPasswordField1KeyPressed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-        // TODO add your handling code here:
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) { 
-           try {
-            Funcionario f = new Funcionario();
-            ConnectionFactory.getConnection();
-             PreparedStatement stmt = null;
-                 stmt = con.prepareStatement("Select * from Funcionario WHERE NOME_FUNCIONARIO = ? AND SENHA_FUNCIONARIO = ?");
-                 stmt.setString(1, jTextField1.getText());
-                 stmt.setString(2, new String(jPasswordField1.getPassword()));
-                //capturar os resultados do select
-		ResultSet rs = stmt.executeQuery();
-		//ver se encontra no banco de dados
-		if (rs.next()) {
-		JOptionPane.showMessageDialog(null, "Usuário logado");
-                f.setIdFunc(rs.getInt("ID_FUNCIONARIO"));
-                JOptionPane.showMessageDialog(null, "O seu código é: " + f.getIdFunc());
-               //chama a tela principal
-                TelaPrincipal a = new TelaPrincipal();
-                a.setVisible(true);
-                dispose();
-                }else{
-		JOptionPane.showMessageDialog(null, "Dados Inválidos");
-		}
-		//fechar o prepareStatement
-		stmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+            verifyUser();
+        }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     /**

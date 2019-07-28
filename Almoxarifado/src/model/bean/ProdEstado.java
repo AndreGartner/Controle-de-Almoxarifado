@@ -12,21 +12,13 @@ package model.bean;
  * CEDUPHH
  */
 public class ProdEstado {
-    
     private int IdProd;
     private String NomeProd;
     private String TipoProd;
     private String OrigemProd;
     private String DataEntradaProd;
     private int Quantidade;
-private String StatusProduto;
-
-     public String getStatusProduto(){
-    return StatusProduto;   
-    }
-    public void setStatusProduto(String StatusProduto){
-        this.StatusProduto = StatusProduto;
-    }
+    private String StatusProduto;
 
     public int getIdProd() {
         return IdProd;
@@ -51,15 +43,15 @@ private String StatusProduto;
     public void setTipoProd(String TipoProd) {
         this.TipoProd = TipoProd;
     }
-    
-     public String getOrigemProd() {
+
+    public String getOrigemProd() {
         return OrigemProd;
     }
 
     public void setOrigemProd(String OrigemProd) {
         this.OrigemProd = OrigemProd;
     }
-    
+
     public String getDataEntradaProd() {
         return DataEntradaProd;
     }
@@ -68,24 +60,20 @@ private String StatusProduto;
         this.DataEntradaProd = DataEntradaProd;
     }
 
-    /**
-     * @return the Quantidade
-     */
     public int getQuantidade() {
         return Quantidade;
     }
 
-    /**
-     * @param Quantidade the Quantidade to set
-     */
     public void setQuantidade(int Quantidade) {
         this.Quantidade = Quantidade;
     }
 
+    public String getStatusProduto() {
+        return StatusProduto;
+    }
 
+    public void setStatusProduto(String StatusProduto) {
+        this.StatusProduto = StatusProduto;
+    }
 
-    
-    
-    
-    
 }

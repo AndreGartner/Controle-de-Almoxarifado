@@ -1,42 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model.bean;
-
 /**
- *
  * @author @author Andre Luiz Gärtner, Yuji Faruk Murakami Feles, Alex Oliveira Fernandes, Eduardo Tavares Hauck, João Victor Küster Cardoso
  * INFEM302
  * CEDUPHH
  */
+package model.bean;
+
 public class ControleProd {
-         
-          private int QtdProd;
-          private int fkIdProd;
-          private int fkIdControle;
-          
-  
-    
-          
-    public int getfkIdProd(){
-        return fkIdProd;
-    }
-    
-    public void setfkIdProd(int fkIdProd){
-        this.fkIdProd = fkIdProd;
-        
-    }
-    
-    public int getfkIdControle(){
-        return fkIdControle;
-    }
-    
-    public void setfkIdControle(int fkIdControle){
-        this.fkIdControle = fkIdControle;
-        
-    }
+    private int QtdProd;
+    private Controle controle;
+    private ProdEstado produto;
 
     public int getQtdProd() {
         return QtdProd;
@@ -44,5 +16,33 @@ public class ControleProd {
 
     public void setQtdProd(int QtdProd) {
         this.QtdProd = QtdProd;
+    }
+
+    /**
+     * @return the produto
+     */
+    public ProdEstado getProduto() {
+        return produto;
+    }
+
+    /**
+     * @param produto the produto to set
+     */
+    public void setProduto(ProdEstado produto) {
+        this.produto = produto;
+    }
+
+    /**
+     * @return the controle
+     */
+    public Controle getControle() {
+        return controle;
+    }
+
+    /**
+     * @param controle the controle to set
+     */
+    public void setControle(Controle controle) {
+        this.controle = controle;
     }
 }

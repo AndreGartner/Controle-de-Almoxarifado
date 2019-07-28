@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author rosan
  */
 package Controle;
 
@@ -9,10 +7,6 @@ import Controle.dao.FuncionarioDAO;
 import javax.swing.JOptionPane;
 import model.bean.Funcionario;
 
-/**
- *
- * @author rosan
- */
 public class Cadastro extends javax.swing.JFrame {
 
     /**
@@ -180,31 +174,33 @@ public class Cadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        Login login                   = new Login();
+        Funcionario funcionario       = new Funcionario();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
-        if (txtLogin.getText() == null || txtSenha.getPassword().length == 0) {
+        // Verificação dos TextFields. Se estão ou não vazios.
+        if (txtLogin.getText() == null || txtLogin.getText().trim().equals("") || txtSenha.getPassword().length == 0) {
             JOptionPane.showMessageDialog(null, "Campo login ou senha inválido!");
-        } else {
-            if (new String(txtSenha.getPassword()).equals(new String(txtConfSenha.getPassword()))) {
-                int opcao;
-                opcao = JOptionPane.showConfirmDialog(null, "Você confirma os dados acrescentados?", " Sim ou Não?",
-                        JOptionPane.YES_NO_OPTION);
-                if (opcao == 0) {
-                    Funcionario f = new Funcionario();
-                    f.setNomeFunc(txtLogin.getText());
-                    f.setSenhaFunc(new String(txtSenha.getPassword()));
-                    FuncionarioDAO fd = new FuncionarioDAO();
-                    fd.inserir(f);
-                    Login login = new Login();
-                    login.setVisible(true);
-                    dispose();
-                } else if (opcao == 1) {
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Sua senha não condiz com a confirmação de senha. Tente novamente.");
-            }
+            return;
         }
+        
+        // Verificação se a senha condiz com a confirmação da senha.
+        if (new String(txtSenha.getPassword()).equals(new String(txtConfSenha.getPassword()))) {
+            int opcao = JOptionPane.showConfirmDialog(null, "Você confirma os dados acrescentados?", " Sim ou Não?", JOptionPane.YES_NO_OPTION);
 
+            if (opcao == 0) {
+                funcionario.setNomeFunc(txtLogin.getText());
+                funcionario.setSenhaFunc(new String(txtSenha.getPassword()));
 
+                funcionarioDAO.inserir(funcionario);
+
+                login.setVisible(true);
+                dispose();
+                return;
+            }
+        } 
+        
+        JOptionPane.showMessageDialog(null, "Sua senha não condiz com a confirmação de senha. Tente novamente.");
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
