@@ -186,9 +186,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        String senhaadministrativa = JOptionPane.showInputDialog("Você precisa do acesso administrativo para o cadastramento.", JOptionPane.YES_NO_OPTION);
+        String senhaadministrativa = JOptionPane.showInputDialog("Você precisa do acesso administrativo para o cadastramento.");
         String verificacao = "123456";
        
+        if (senhaadministrativa == null) return;
+        
         if (!senhaadministrativa.equals(verificacao)) {
             JOptionPane.showMessageDialog(null, "Senha inválida. Tente novamente.");
             return;

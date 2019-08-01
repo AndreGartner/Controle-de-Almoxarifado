@@ -52,7 +52,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
             JOptionPane.showMessageDialog(null, "Erro ao salvar!" + ex);
         }
         
-        return 0;
+        return objeto.getIdProd();
     }
 
     /**
@@ -69,7 +69,7 @@ public class ProdDAO implements OverDAO<ProdEstado> {
 
             stmt = con.prepareStatement(
                 "UPDATE Produto SET NOME_PRODUTO = ?, TIPO_PRODUTO = ?, ORIGEM_PRODUTO = ?,"
-                + "DATA_ENTRADA_PROD = ?,STATUS_PRODUTO = ?,QUANTIDADE_PRODUTO_ENTRADO=?"
+                + "DATA_ENTRADA_PROD = ?,STATUS_PRODUTO = ?,QUANTIDADE_PRODUTO_ENTRADO=? "
                 + "WHERE ID_PRODUTO = ?;"
             );
 

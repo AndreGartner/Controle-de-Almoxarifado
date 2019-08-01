@@ -1484,18 +1484,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
             return;
         }
             
-        produtoEstado.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         produtoEstado.setIdProd(Integer.parseInt(txtID.getText()));
         produtoEstado.setNomeProd(txtNome.getText());
-        produtoEstado.setDataEntradaProd(txtDataEntrada.getText());
         produtoEstado.setTipoProd((String) cbTipo.getSelectedItem());
         produtoEstado.setOrigemProd((String) cbOrigem.getSelectedItem());
+        produtoEstado.setDataEntradaProd(txtDataEntrada.getText());
+        produtoEstado.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        produtoEstado.setStatusProduto("Disponível");
+        
+        if (produtoEstado.getQuantidade() < 1) {
+            produtoEstado.setStatusProduto("Indisponível");
+        }
 
         prodDAO.alterar(produtoEstado);
+        readJTable();
     }//GEN-LAST:event_btnAtualizarProdActionPerformed
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
         String nome = JOptionPane.showInputDialog("Nome desejado.");
+        
+        if (nome == null) return;
+        
         if (nome.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Erro, insira alguma informação no campo de texto do nome do produto.");
             return;
