@@ -63,7 +63,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtIDInvisivelCLI.setVisible(false);
 
         this.setLocationRelativeTo(null);
-        PainelCadastrar.setVisible(false);
+        productPanel.setVisible(false);
         PainelEmprestimo.setVisible(false);
 
         // Chamando os métodos de atualizações das tabelas do Banco de dados no Jtable
@@ -275,7 +275,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         PainelPrincipal = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        PainelCadastrar = new javax.swing.JPanel();
+        productPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaProduto = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -334,13 +334,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         LabelTabelaProduto = new javax.swing.JLabel();
         btnRealizarCadCli = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        MenuCadastrar = new javax.swing.JMenu();
-        MenuEmprestimoDevolucao = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        MenuSobre = new javax.swing.JMenu();
-        MenuSair = new javax.swing.JMenu();
+        ProductItem = new javax.swing.JMenu();
+        loanItem = new javax.swing.JMenu();
+        reportItem = new javax.swing.JMenu();
+        loanReport = new javax.swing.JMenu();
+        clientReport = new javax.swing.JMenu();
+        aboutItem = new javax.swing.JMenu();
+        exitItem = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -396,15 +396,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela Principal");
+        setTitle("Main");
         setMinimumSize(new java.awt.Dimension(540, 650));
         setResizable(false);
         setSize(new java.awt.Dimension(540, 650));
 
-        PainelCadastrar.setBackground(new java.awt.Color(217, 217, 243));
-        PainelCadastrar.setMaximumSize(new java.awt.Dimension(540, 650));
-        PainelCadastrar.setMinimumSize(new java.awt.Dimension(540, 650));
-        PainelCadastrar.setPreferredSize(new java.awt.Dimension(540, 650));
+        productPanel.setBackground(new java.awt.Color(217, 217, 243));
+        productPanel.setMaximumSize(new java.awt.Dimension(540, 650));
+        productPanel.setMinimumSize(new java.awt.Dimension(540, 650));
+        productPanel.setPreferredSize(new java.awt.Dimension(540, 650));
 
         TabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -526,110 +526,110 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Tabela dos produtos");
 
-        javax.swing.GroupLayout PainelCadastrarLayout = new javax.swing.GroupLayout(PainelCadastrar);
-        PainelCadastrar.setLayout(PainelCadastrarLayout);
-        PainelCadastrarLayout.setHorizontalGroup(
-            PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCadastrarLayout.createSequentialGroup()
-                .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
+        productPanel.setLayout(productPanelLayout);
+        productPanelLayout.setHorizontalGroup(
+            productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelCadastrarLayout.createSequentialGroup()
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, productPanelLayout.createSequentialGroup()
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAtualizarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BotaoInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addGap(79, 79, 79)
                                 .addComponent(botaoiniciarcadastramento))
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addGap(89, 89, 89)
                                 .addComponent(botaoiniciaratualizacao)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(29, 29, 29))
-            .addGroup(PainelCadastrarLayout.createSequentialGroup()
-                .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelCadastrarLayout.createSequentialGroup()
+            .addGroup(productPanelLayout.createSequentialGroup()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(108, 108, 108)
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel15))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addComponent(txtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                            .addGroup(productPanelLayout.createSequentialGroup()
                                 .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2))))
-                    .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                    .addGroup(productPanelLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jLabel17)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
-        PainelCadastrarLayout.setVerticalGroup(
-            PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCadastrarLayout.createSequentialGroup()
+        productPanelLayout.setVerticalGroup(
+            productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productPanelLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                    .addGroup(productPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCadastrarLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)))
                 .addGap(18, 18, 18)
-                .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(cbOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15)))
-                .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productPanelLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAtualizarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoiniciaratualizacao))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BotaoInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoiniciarcadastramento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(PainelCadastrarLayout.createSequentialGroup()
+                    .addGroup(productPanelLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(btnConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -984,62 +984,63 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(116, 116, 116))
         );
 
-        MenuCadastrar.setText("Cadastrar");
-        MenuCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        ProductItem.setText("Product");
+        ProductItem.setName(""); // NOI18N
+        ProductItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuCadastrarMouseClicked(evt);
+                ProductItemMouseClicked(evt);
             }
         });
-        jMenuBar1.add(MenuCadastrar);
+        jMenuBar1.add(ProductItem);
 
-        MenuEmprestimoDevolucao.setText("Emprestímo/Devolução");
-        MenuEmprestimoDevolucao.addMouseListener(new java.awt.event.MouseAdapter() {
+        loanItem.setText("Loan");
+        loanItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuEmprestimoDevolucaoMouseClicked(evt);
+                loanItemMouseClicked(evt);
             }
         });
-        jMenuBar1.add(MenuEmprestimoDevolucao);
+        jMenuBar1.add(loanItem);
 
-        jMenu3.setText("Consulta");
+        reportItem.setText("Report");
 
-        jMenu2.setText("Relatório");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        loanReport.setText("Loan");
+        loanReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                loanReportMouseClicked(evt);
             }
         });
-        jMenu3.add(jMenu2);
+        reportItem.add(loanReport);
 
-        jMenu4.setText("Cliente");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        clientReport.setText("Client");
+        clientReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
+                clientReportMouseClicked(evt);
             }
         });
-        jMenu3.add(jMenu4);
+        reportItem.add(clientReport);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(reportItem);
 
-        MenuSobre.setText("Sobre");
-        MenuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+        aboutItem.setText("About");
+        aboutItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuSobreMouseClicked(evt);
+                aboutItemMouseClicked(evt);
             }
         });
-        MenuSobre.addActionListener(new java.awt.event.ActionListener() {
+        aboutItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuSobreActionPerformed(evt);
+                aboutItemActionPerformed(evt);
             }
         });
-        jMenuBar1.add(MenuSobre);
+        jMenuBar1.add(aboutItem);
 
-        MenuSair.setText("Sair");
-        MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+        exitItem.setText("Exit");
+        exitItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuSairMouseClicked(evt);
+                exitItemMouseClicked(evt);
             }
         });
-        jMenuBar1.add(MenuSair);
+        jMenuBar1.add(exitItem);
 
         setJMenuBar(jMenuBar1);
 
@@ -1049,7 +1050,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PainelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(productPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PainelEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1060,7 +1061,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PainelEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PainelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(productPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -1068,17 +1069,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSobreActionPerformed
-    }//GEN-LAST:event_MenuSobreActionPerformed
+    private void aboutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutItemActionPerformed
+    }//GEN-LAST:event_aboutItemActionPerformed
 
-    private void MenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSairMouseClicked
+    private void exitItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitItemMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_MenuSairMouseClicked
+    }//GEN-LAST:event_exitItemMouseClicked
 
-    private void MenuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSobreMouseClicked
+    private void aboutItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutItemMouseClicked
         new Sobre().setVisible(true);
         dispose();
-    }//GEN-LAST:event_MenuSobreMouseClicked
+    }//GEN-LAST:event_aboutItemMouseClicked
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
     }//GEN-LAST:event_cbTipoActionPerformed
@@ -1087,8 +1088,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
     
 // Quando clicar no menu de cadastro de produto 
-    private void MenuCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuCadastrarMouseClicked
-        PainelCadastrar.setVisible(true);
+    private void ProductItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductItemMouseClicked
+        productPanel.setVisible(true);
         PainelEmprestimo.setVisible(false);
         jLabel2.setVisible(false);
         txtID.setVisible(false);
@@ -1115,11 +1116,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtStatus.setEnabled(false);
         txtQuantidade.setEnabled(false);
         limpar();
-    }//GEN-LAST:event_MenuCadastrarMouseClicked
+    }//GEN-LAST:event_ProductItemMouseClicked
 
     // Quando clicar no menu de Empréstimo/Devolução
-    private void MenuEmprestimoDevolucaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuEmprestimoDevolucaoMouseClicked
-        PainelCadastrar.setVisible(false);
+    private void loanItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loanItemMouseClicked
+        productPanel.setVisible(false);
         PainelEmprestimo.setVisible(true);
         txtIDInvisivel.setVisible(false);
         btnAtualizarProd.setEnabled(false);
@@ -1148,7 +1149,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtDataDevolucao.setEnabled(false);
         txtQuantidadeDeEmprestimo.setEnabled(false);
         limpar();
-    }//GEN-LAST:event_MenuEmprestimoDevolucaoMouseClicked
+    }//GEN-LAST:event_loanItemMouseClicked
 
     private void BotaoInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoInserirActionPerformed
         produtoEstado.setOrigemProd((String) cbOrigem.getSelectedItem());
@@ -1554,7 +1555,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limpar();
-        PainelCadastrar.setVisible(true);
+        productPanel.setVisible(true);
         PainelEmprestimo.setVisible(false);
         jLabel2.setVisible(false);
         txtID.setVisible(false);
@@ -1622,18 +1623,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(jMenu1, "Preencha o campo da data de empréstimo, data de devolução e quantidade caso esteja efetuando um empréstimo.");
     }//GEN-LAST:event_TabelaClienteMouseClicked
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+    private void loanReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loanReportMouseClicked
         Relatorio r = new Relatorio();
         r.setVisible(true);
-    }//GEN-LAST:event_jMenu2MouseClicked
+    }//GEN-LAST:event_loanReportMouseClicked
 
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    private void clientReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientReportMouseClicked
         int opcao = JOptionPane.showConfirmDialog(null, "Você deseja realizar uma consulta na tabela de clientes?", " Sim ou Não?", JOptionPane.YES_NO_OPTION);
         if (opcao == 0) {
             ConsultaCliente cc = new ConsultaCliente();
             cc.setVisible(true);
         }
-    }//GEN-LAST:event_jMenu4MouseClicked
+    }//GEN-LAST:event_clientReportMouseClicked
 
     private void botaorealizardevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaorealizardevolucaoActionPerformed
         TabelaProduto2.setVisible(true);
@@ -1729,17 +1730,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel LabelTabelaCliente;
     private javax.swing.JLabel LabelTabelaEmprestimo;
     private javax.swing.JLabel LabelTabelaProduto;
-    private javax.swing.JMenu MenuCadastrar;
-    private javax.swing.JMenu MenuEmprestimoDevolucao;
-    private javax.swing.JMenu MenuSair;
-    private javax.swing.JMenu MenuSobre;
-    private javax.swing.JPanel PainelCadastrar;
     private javax.swing.JPanel PainelEmprestimo;
     private javax.swing.JPanel PainelPrincipal;
+    private javax.swing.JMenu ProductItem;
     private javax.swing.JTable TabelaCliente;
     private javax.swing.JTable TabelaEmprestimo;
     private javax.swing.JTable TabelaProduto;
     private javax.swing.JTable TabelaProduto2;
+    private javax.swing.JMenu aboutItem;
     private javax.swing.JButton botaocadastrarcliente;
     private javax.swing.JButton botaoconsultarcliente;
     private javax.swing.JButton botaodevolver;
@@ -1754,6 +1752,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbOrigem;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipo1;
+    private javax.swing.JMenu clientReport;
+    private javax.swing.JMenu exitItem;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
@@ -1776,9 +1776,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1788,6 +1785,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu loanItem;
+    private javax.swing.JMenu loanReport;
+    private javax.swing.JPanel productPanel;
+    private javax.swing.JMenu reportItem;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtDataDevolucao;
     private javax.swing.JTextField txtDataEmprestimo;
